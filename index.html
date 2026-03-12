@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Carrom Game</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body style="margin:0;padding:0;background:#050a0a;color:#fff;font-family:Arial,sans-serif;overflow:hidden">
+<div id="game" style="width:100%;height:100vh;background:yellow;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:bold;color:#000">
+CARROM GAME LOADING...
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+var canvas=document.createElement('canvas');
+document.body.appendChild(canvas);
+canvas.style.width='100%';
+canvas.style.height='100%';
+canvas.style.display='block';
+
+if(typeof THREE!=='undefined'){
+var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+var scene=new THREE.Scene();
+scene.background=new THREE.Color(0x050a0a);
+var camera=new THREE.PerspectiveCamera(26,window.innerWidth/window.innerHeight,0.1,200);
+camera.position.set(0,12,2);
+camera.lookAt(0,0,0);
+
+var light=new THREE.AmbientLight(0xfffafa,2.2);
+scene.add(light);
+
+var board=new THREE.Mesh(new THREE.BoxGeometry(9.24,0.14,9.24),new THREE.MeshBasicMaterial({color:0xa06c28}));
+board.position.y=0.07;
+scene.add(board);
+
+document.getElementById('game').style.display='none';
+
+function animate(){
+requestAnimationFrame(animate);
+renderer.render(scene,camera);
+}
+animate();
+}
+</script>
+</body>
+</html>
